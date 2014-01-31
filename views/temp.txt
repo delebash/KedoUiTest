@@ -1,0 +1,198 @@
+<script type="text/x-kendo-template" id="layout" highlight="31">
+
+
+    <nav class="navbar-wrapper navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">KendoUI Test</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li><a href="#/contacts"><span class="glyphicon glyphicon-user"></span> Contacts</a></li>
+                    <li><a href="#/about"></span> About</a></li>
+                    <li><a href="#/contactUs"></span> Contact Us</a></li>
+                  <!--  <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> About Us<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Company Details</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </li> -->
+                </ul>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search"/>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <!--<ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-asterisk"></span> Book Tickets</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-info-sign"></span> Reservation<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Cancel</a></li>
+                            <li><a href="#">Confirm</a></li>
+                        </ul>
+                    </li>
+                </ul> -->
+
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+
+
+
+
+
+
+<!--
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="http://blog.longle.net" class="brand">blog.longle.net</a>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="#/">Home</a></li>
+                        <li><a href="#/about">About</a></li>
+                        <li><a href="#/contact">Contact Us</a></li>
+                        <li><a href="#/contacts">Contacts</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+
+
+
+    <div id="container" class="container">
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">&copy; 2013</div>
+                <div class="col-md-4">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#">About Us</a></li>
+                        <li><a href="#">Support 24x7</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-right">Vacation Rentals</h3>
+                </div>
+            </div>
+        </div>
+    </footer>
+</script>
+
+
+
+<script type="text/x-kendo-template" id="about">
+    <section class="content-wrapper main-content clear-fix">
+        <hgroup class="title">
+            <h1>About.</h1>
+            <h2>Your app description page.</h2>
+        </hgroup>
+
+        <article>
+            <p>
+                Use this area to provide additional information.
+            </p>
+
+            <p>
+                Use this area to provide additional information.
+            </p>
+
+            <p>
+                Use this area to provide additional information.
+            </p>
+        </article>
+
+        <aside>
+            <h3>Aside Title</h3>
+            <p>
+                Use this area to provide additional information.
+            </p>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/Home/About">About</a></li>
+                <li><a href="/Home/Contact">Contact</a></li>
+            </ul>
+        </aside>
+    </section>
+</script>
+<script>
+    var aboutModel = new kendo.data.ObservableObject({});
+</script>
+
+
+<script type="text/x-kendo-template" id="home">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>Home Page.</h1>
+                <h2>Modify this template to jump-start your ASP.NET MVC application.</h2>
+            </hgroup>
+            <p>
+                To learn more about ASP.NET MVC visit
+                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
+                If you have any questions about ASP.NET MVC visit
+                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
+            </p>
+        </div>
+    </section>
+
+    <section class="content-wrapper main-content clear-fix">
+
+        <h3>We suggest the following:</h3>
+        <ol class="round">
+            <li class="one">
+                <h5>Getting Started</h5>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and that gives you full control over markup
+                for enjoyable, agile development. ASP.NET MVC includes many features that enable
+                fast, TDD-friendly development for creating sophisticated applications that use
+                the latest web standards.
+                <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
+            </li>
+
+            <li class="two">
+                <h5>Add NuGet packages and jump-start your coding</h5>
+                NuGet makes it easy to install and update free libraries and tools.
+                <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
+            </li>
+
+            <li class="three">
+                <h5>Find Web Hosting</h5>
+                You can easily find a web hosting company that offers the right mix of features
+                and price for your applications.
+                <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
+            </li>
+        </ol>
+
+    </section>
+</script>
+<script>
+    var homeModel = new kendo.data.ObservableObject({});
+</script>

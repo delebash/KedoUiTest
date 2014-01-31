@@ -1,0 +1,144 @@
+<script type="text/x-kendo-template" id="contacts">
+
+          <div class="k-content" style="width:100%">
+            <div id="contactsForm">
+                <div id="contactGrid"
+                     data-role="grid"
+                     data-sortable="true"
+                     data-pageable="true"
+                     data-filterable="true"
+                     data-bind="source: dataSource, events:{dataBound: dataBound, change: onChange}"
+                     data-editable = "inline"
+                     data-selectable="true"
+                     data-columns='[
+                    { field: "__KEY", title: "Id", width: "50px" },
+                    { field: "firstName", title: "First Name", width: "300px" },
+                    { field: "lastName", title: "Last Name", width: "300px" },
+                    { command : [ "edit", "destroy", { text: "Edit Details", click: editContact } ], title: "Action",  } ]'>
+                </div>
+            </div>
+        </div>
+
+</script>
+
+<script>
+    function editContact(e) {
+        e.preventDefault();
+        var tr = $(e.currentTarget).closest("tr");
+        var dataItem = $("#contactGrid").data("kendoGrid").dataItem(tr);
+        window.location.href = '#/contactEdit/' + dataItem.__KEY;
+    }
+
+    var lastSelectedContactId;
+
+    var crudServiceBaseUrl = "http://127.0.0.1:8081/cors";
+    var entity = "/Contact"
+    var contactsModel = kendo.observable({
+        dataSource: dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: crudServiceBaseUrl + entity,
+                    dataType: "json",
+                    type : "GET"
+                },
+                update: {
+                    url: function (data) {
+                        return crudServiceBaseUrl + entity + "/?$method=update"
+                    },
+                    dataType: "json",
+                    contentType: "application/json",
+                    type : "POST"
+                },
+                destroy: {
+                    url: function (data) {
+                       // return crudServiceBaseUrl + cudEntity + "(" + entity.models[0].__KEY + ")/?$method=delete";
+                        return crudServiceBaseUrl + entity + "(" + data.models[0].__KEY + ")/?$method=delete";
+                    },
+                    dataType: "json",
+                    type : "POST"
+                },
+                create: {
+                    url: function (data) {
+                        return crudServiceBaseUrl + entity + "/?$method=update"
+                    },
+                    dataType: "json",
+                    type : "POST"
+                },
+                parameterMap : function(data, operation) {
+                    //use data.models only if batch=true else just use data
+
+                    if (operation == "create" || operation == "update") {
+                      //  debugger
+                        return kendo.stringify(data.models);
+                      //  myData = data.models;
+                      //  configureDataForWakandaDB(myParentEntity, myParentKey, myData, operation, myRelationShipType);
+//                        return JSON.stringify({
+//                            "__ENTITIES" : data.models
+//                        });
+                    }
+                }
+//                parameterMap: function(data, type) {
+//                    debugger;
+//                    if (type == "update") {
+//                        // send the created data items as the "models" service parameter encoded in JSON
+//                        return kendo.stringify(data);
+//                        //return { models: kendo.stringify(data.models) };
+//                    }
+//                }
+            },
+            batch: true,
+            serverPaging: true,
+            serverSorting: true,
+            serverFiltering: true,
+            pageSize: 10,
+            schema: {
+                data : "__ENTITIES",
+                total: function (data) {
+                    return data["__COUNT"];
+                },
+                errors: function (data) {
+                },
+                model: {
+                    id: "__KEY",
+                    fields: {
+                        __KEY: { type: "number", editable: false, nullable: true },
+                        firstName: { type: "string", validation: { required: true } },
+                        lastName: { type: "string", validation: { required: true } },
+                    }
+                }
+            },
+            error: function (e) {
+                var message = e.xhr.responseJSON["__ERROR"][0].message;
+                var errCode = e.xhr.responseJSON["__ERROR"][0].errCode;
+                alert(message + "\n\n" + errCode);
+            }
+        }),
+        dataBound: function (arg) {
+            if (lastSelectedContactId == null) return; // check if there was a row that was selected
+            var view = this.dataSource.view(); // get all the rows
+            for (var i = 0; i < view.length; i++) { // iterate through rows
+                if (view[i].__KEY == lastSelectedContactId) { // find row with the lastSelectedProductd
+                    var grid = arg.sender; // get the grid
+                    grid.select(grid.table.find("tr[data-uid='" + view[i].uid + "']")); // set the selected row
+                    break;
+                }
+            }
+        },
+        onChange: function (arg) {
+            var grid = arg.sender;
+            var dataItem = grid.dataItem(grid.select());
+            lastSelectedContactId = dataItem.__KEY;
+        }
+    });
+
+    $(document).bind("viewSwtichedEvent", function (e, args) { // subscribe to the viewSwitchedEvent
+        if (args.name == "contacts") { // check if this view was switched too
+            if (args.isRemotelyLoaded) { // check if this view was remotely loaded from server
+                kendo.bind($("#contactsForm"), contactsModel); // bind the view to the model
+            } else {// view already been loaded in cache
+                contactsModel.dataSource.fetch(function() {}); // refresh grid
+            }
+        }
+    });
+
+</script>
